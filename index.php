@@ -39,11 +39,14 @@
         <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="connexion.php">Connexion</a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="./CONNEXIONSQL/deconnexion.php">Deconnexion</a>
-        </li>
         <?php
-              if($value['login'] == $value['login']){
+                if($value['role'] == "utilisateur" || $value['role'] == "administrateur"){
+                  ?><li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="./CONNEXIONSQL/deconnexion.php">Deconnexion</a>
+        </li>
+        <?php }; ?>
+        <?php
+              if($value['role'] == "utilisateur" || $value['role'] == "administrateur"){
                 ?><li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="profil.php">Modifier son profil</a>
         </li>

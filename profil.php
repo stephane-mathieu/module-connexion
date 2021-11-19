@@ -23,9 +23,12 @@ include('./CONNEXIONSQL/stock.php');
 </head>
 
 <body>
+
+
 <header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
+  
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -37,13 +40,16 @@ include('./CONNEXIONSQL/stock.php');
         <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="connexion.php">Connexion</a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="./CONNEXIONSQL/deconnexion.php">Deconnexion</a>
-        </li>
         <?php
-              if($value['login'] == $value['login']){
+                if($value['role'] == "utilisateur" || $value['role'] == "administrateur"){
+                  ?><li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="./CONNEXIONSQL/deconnexion.php">Deconnexion</a>
+        </li>
+        <?php }; ?>
+        <?php
+              if($value['role'] == "utilisateur" || $value['role'] == "administrateur"){
                 ?><li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="profil.php">Modifier son profile</a>
+                <a class="nav-link active" aria-current="page" href="profil.php">Modifier son profil</a>
         </li>
         <?php }; ?>
           <?php
@@ -125,10 +131,10 @@ include('./CONNEXIONSQL/stock.php');
     $prenomtest = trim($_POST['prenom']);
     $nomtest = trim($_POST['nom']);
     $passwordtest = trim($_POST['password']);
+    $pswd = password_hash($passwordtest,PASSWORD_DEFAULT);
 
-    $query = "UPDATE `utilisateurs` set `login` = '$logintest', `prenom` = '$prenomtest', `nom` = '$nomtest', `password` = '$passwordtest' WHERE `id` = $id ";
+    $query = "UPDATE `utilisateurs` set `login` = '$logintest', `prenom` = '$prenomtest', `nom` = '$nomtest', `password` = '$pswd' WHERE `id` = $id ";
     $update = mysqli_query($conn, $query);
-    
   }else
     echo "Veuillez remplire ces champs vide <br>";
 
