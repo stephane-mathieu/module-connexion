@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
 
 
 
-  if (password_verify($password, $result_psw['password'])) {
+  if ($password == $result_psw['password']) {
     $_SESSION['login'] = test($login);
     if (isset($_POST['submit'])) {
       header("Location: index.php");

@@ -10,7 +10,6 @@ if (isset($_SESSION['login'])) {
   $start = mysqli_query($conn, $requette);
   if (isset($start))
     $recuper = mysqli_fetch_all($start);
-  // var_dump($recuper);
 } else {
   echo 'test';
 }
@@ -20,20 +19,16 @@ if (!empty($_POST['login']) && !empty($_POST['prenom']) && !empty($_POST['nom'])
   $prenomtest = $_POST['prenom'];
   $nomtest = $_POST['nom'];
   $passwordtest = $_POST['password'];
-  $pswhash = password_hash($passwordtest, PASSWORD_DEFAULT);
 
-  // $pswd = password_hash($passwordtest, PASSWORD_DEFAULT);
 
-  $query = "UPDATE `utilisateurs` SET `login` = '$logintest', `prenom` = '$prenomtest', `nom` = '$nomtest', `password` = '$pswhash' WHERE `id` = $id ";
+  $query = "UPDATE `utilisateurs` SET `login` = '$logintest', `prenom` = '$prenomtest', `nom` = '$nomtest', `password` = '$passwordtest' WHERE `id` = $id ";
   $update = mysqli_query($conn, $query);
-  // var_dump($query);
   echo "votre profil à été modifié <br>";
 
   if (isset($update)) {
     $requette = "SELECT * FROM utilisateurs WHERE id = $id";
     $start = mysqli_query($conn, $requette);
     $recuper = mysqli_fetch_all($start);
-    // var_dump($recuper);
   }
 } else
   echo "Veuillez remplire ces champs vide <br>";

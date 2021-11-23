@@ -9,7 +9,6 @@
     $start = mysqli_query($conn, $requette);
     if (isset($start))
       $recuper = mysqli_fetch_all($start);
-    // var_dump($recuper);
   }
   if(isset($_POST['submit'])){
     session_unset();
