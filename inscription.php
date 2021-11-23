@@ -14,8 +14,8 @@
         $result = mysqli_fetch_all($query);
         if (count($result) == 0){
             if ($confirmpassword == $password) {
-                $pswhash = password_hash($password, PASSWORD_DEFAULT);
-                $res = mysqli_query($conn, "INSERT INTO utilisateurs(login, prenom, nom, password, role) VALUES ('$login','$prenom','$nom','$pswhash','utilisateur')");
+                // $pswhash = password_hash($password, PASSWORD_DEFAULT);
+                $res = mysqli_query($conn, "INSERT INTO utilisateurs(login, prenom, nom, password, role) VALUES ('$login','$prenom','$nom','$password','utilisateur')");
                 header('Location:connexion.php');
                 exit();
             } else {
@@ -24,9 +24,9 @@
         }else {
             echo 'login deja utilisé';
         }
-       
-    }else
-    echo "Veuillez remplire ces champs vide <br>";
+    }else {
+        echo "Veuillez remplire ces champs vide <br>";
+    }
 ?>
 
 <!DOCTYPE html>

@@ -4,6 +4,13 @@
   
   include('./CONNEXIONSQL/connectmysql.php');
   include('./CONNEXIONSQL/stock.php');
+  if (isset($_SESSION['login'])) {
+    $requette = "SELECT * FROM utilisateurs WHERE id = $id";
+    $start = mysqli_query($conn, $requette);
+    if (isset($start))
+      $recuper = mysqli_fetch_all($start);
+    // var_dump($recuper);
+  }
   if(isset($_POST['submit'])){
     session_unset();
   }
@@ -71,7 +78,7 @@
 
 
 <div class="sucess">
-    <h1 class="text-center  fst-italic text-white">Bienvenue sur votre page  <?php  echo $value['login']; ?></h1>
+    <h1 class="text-center  fst-italic text-white">Bienvenue sur votre page  <?php  echo $recuper[0][1] ; ?></h1>
 
   <div>
       <video src="./img/Pexels Videos 2759477.mp4" height="50%" width="100%" autoplay loop muted></video>
