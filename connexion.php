@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 include('./CONNEXIONSQL/connectmysql.php');
 
 if (isset($_POST['submit'])) {
@@ -16,7 +15,7 @@ if (isset($_POST['submit'])) {
   $result2 = mysqli_fetch_assoc($query2);
 
 
-  $re = "SELECT login,password FROM utilisateurs WHERE login = '$login'";
+  $re = "SELECT password FROM utilisateurs WHERE login = '$login'";
   $que = mysqli_query($conn, $re);
   $result_psw = mysqli_fetch_assoc($que);
 
@@ -33,7 +32,7 @@ if (isset($_POST['submit'])) {
 
 
 
-  if ($password == $result_psw['password']) {
+  if (password_verify($password, $result_psw['password'])) {
     $_SESSION['login'] = test($login);
     if (isset($_POST['submit'])) {
       header("Location: index.php");
@@ -49,6 +48,7 @@ if (isset($_POST['submit'])) {
     echo "Le nom d'utilisateur ou le mot de passe est incorrect.";
   }
 }
+
 
 ?>
 
@@ -160,5 +160,7 @@ if (isset($_POST['submit'])) {
 </body>
 
 </html>
+
+
 
 

@@ -1,5 +1,5 @@
 <?php
-// include('./CONNEXIONSQL/connectmysql.php');
+session_start();
 include('./CONNEXIONSQL/stock.php');
 
 $conn = mysqli_connect("localhost", "root", "", "moduleconnexion");
@@ -20,10 +20,11 @@ if (!empty($_POST['login']) && !empty($_POST['prenom']) && !empty($_POST['nom'])
   $prenomtest = $_POST['prenom'];
   $nomtest = $_POST['nom'];
   $passwordtest = $_POST['password'];
+  $pswhash = password_hash($passwordtest, PASSWORD_DEFAULT);
 
   // $pswd = password_hash($passwordtest, PASSWORD_DEFAULT);
 
-  $query = "UPDATE `utilisateurs` SET `login` = '$logintest', `prenom` = '$prenomtest', `nom` = '$nomtest', `password` = '$passwordtest' WHERE `id` = $id ";
+  $query = "UPDATE `utilisateurs` SET `login` = '$logintest', `prenom` = '$prenomtest', `nom` = '$nomtest', `password` = '$pswhash' WHERE `id` = $id ";
   $update = mysqli_query($conn, $query);
   // var_dump($query);
   echo "votre profil à été modifié <br>";
